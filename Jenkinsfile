@@ -2,14 +2,12 @@ pipeline {
     agent any
 
     environment {
-        // Optional: Set a default Git credentials ID here if needed
         GIT_CREDENTIALS_ID = 'test_creds'
     }
 
     stages {
         stage('Checkout Repo') {
             steps {
-                // Checkout code with Git credentials if needed
                 git url: 'https://github.com/uncorden/project.cicd.jenkins.git',
                     branch: 'main',
                     credentialsId: "${env.GIT_CREDENTIALS_ID}"
