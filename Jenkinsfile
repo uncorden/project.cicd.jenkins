@@ -14,7 +14,7 @@ node {
     stage('Build') {
         echo "Building branch: ${params.BRANCH_NAME}"
     }
-    stage('Read Readme') {
-        cat README.md
+    stage('ReadReadme') {
+        sh 'cat README.md'
     }
 }
