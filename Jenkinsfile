@@ -6,7 +6,7 @@ properties([
 
 node {
      withVault([vaultSecrets: [
-        [path: 'data/git', secretValues: [
+        [path: '/v1/secret/data/git', secretValues: [
             [envVar: 'GIT_TOKEN', vaultKey: 'token']
         ]]
     ]]){
