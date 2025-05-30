@@ -24,7 +24,7 @@ node {
             echo 'Printing README.md content:'
               sh 'git config --global user.email saurabh.ghodki91@gmail.com'
               sh 'git config --global user.name saurabh'
-            sh 'rm README.md && git add --all && git commit -m "test commit" && git push'
+              sh 'rm README.md && git add --all && git commit -m test_commit && git push --set-upstream origin dev'
         }
      }
 }
