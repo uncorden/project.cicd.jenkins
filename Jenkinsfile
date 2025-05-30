@@ -12,7 +12,7 @@ node {
     ]])
     stage('Checkout') {
         git branch: params.BRANCH_NAME,
-            url: 'https://github.com/uncorden/project.cicd.jenkins.git',
+            url: 'https://github.com/uncorden/project.cicd.jenkins.git'
     }
 
     stage('Build') {
