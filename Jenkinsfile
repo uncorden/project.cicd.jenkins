@@ -5,10 +5,14 @@ properties([
 ])
 
 node {
+     withVault([vaultSecrets: [
+        [path: 'secret/git', secretValues: [
+            [envVar: 'GIT_TOKEN', vaultKey: 'token']
+        ]]
+    ]])
     stage('Checkout') {
         git branch: params.BRANCH_NAME,
             url: 'https://github.com/uncorden/project.cicd.jenkins.git',
-            credentialsId: 'test_creds'
     }
 
     stage('Build') {
