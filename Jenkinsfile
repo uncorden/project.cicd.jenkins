@@ -9,18 +9,19 @@ node {
         [path: 'secret/git', secretValues: [
             [envVar: 'GIT_TOKEN', vaultKey: 'token']
         ]]
-    ]])
-    stage('Checkout') {
-        git branch: params.BRANCH_NAME,
-            url: 'https://github.com/uncorden/project.cicd.jenkins.git'
-    }
+    ]]){
+        stage('Checkout') {
+            git branch: params.BRANCH_NAME,
+                url: 'https://github.com/uncorden/project.cicd.jenkins.git'
+        }
 
-    stage('Build') {
-        echo "Building branch: ${params.BRANCH_NAME}"
-    }
-    
-    stage('ReadReadme') {
-        echo 'Printing README.md content:'
-        sh 'cat README.md'
+        stage('Build') {
+            echo "Building branch: ${params.BRANCH_NAME}"
+        }
+        
+        stage('ReadReadme') {
+            echo 'Printing README.md content:'
+            sh 'cat README.md'
+        }
     }
 }
