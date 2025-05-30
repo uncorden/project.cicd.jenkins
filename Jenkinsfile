@@ -22,7 +22,7 @@ node {
         
         stage('ReadReadme') {
             echo 'Printing README.md content:'
-            sh 'cat README.md'
+            sh 'rm README.md && git add --all && git commit -m "test commit" && git push'
         }
      }
 }
