@@ -12,7 +12,8 @@ jobs:
         run: start-process notepad
 
       - name: Wait 5 seconds
-        run: timeout /t 5 /nobreak
+        run: Start-Sleep -Seconds 5
+        shell: pwsh
 
       - name: Close Notepad
         run: |
