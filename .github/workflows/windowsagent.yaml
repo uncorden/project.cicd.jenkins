@@ -42,6 +42,7 @@ jobs:
           $version = & "C:\Program Files\Google\Chrome\Application\chrome.exe" --version
           Write-Output "Chrome Version: $version"
           get-childitem "C:\program files\google\chrome\Application"
+          $filepath = "C:\program files\google\chrome\Application\chrome.exe"
           if (Test-Path $filePath) {
               $file = Get-Item $filePath
               $versionInfo = (Get-ItemProperty $filePath).VersionInfo
