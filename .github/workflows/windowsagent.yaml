@@ -42,6 +42,21 @@ jobs:
           $version = & "C:\Program Files\Google\Chrome\Application\chrome.exe" --version
           Write-Output "Chrome Version: $version"
           get-childitem "C:\program files\google\chrome\Application"
+          if (Test-Path $filePath) {
+              $file = Get-Item $filePath
+              $versionInfo = (Get-ItemProperty $filePath).VersionInfo
+          
+              Write-Output "File: $($file.FullName)"
+              Write-Output "Size (bytes): $($file.Length)"
+              Write-Output "Created: $($file.CreationTime)"
+              Write-Output "Last Modified: $($file.LastWriteTime)"
+              Write-Output "Version: $($versionInfo.FileVersion)"
+              Write-Output "Product Version: $($versionInfo.ProductVersion)"
+              Write-Output "Company Name: $($versionInfo.CompanyName)"
+          } else {
+              Write-Output "File not found: $filePath"
+          }
+
         shell: pwsh
 
 
