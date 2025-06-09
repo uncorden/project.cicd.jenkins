@@ -57,6 +57,7 @@ jobs:
           } else {
               Write-Output "File not found: $filePath"
           }
+          mvn --version
 
         shell: pwsh
 
