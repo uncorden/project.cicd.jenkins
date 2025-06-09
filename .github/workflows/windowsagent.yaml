@@ -1,0 +1,28 @@
+name: Open and Close Notepad on Windows Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  open-close-notepad:
+    runs-on: windows-latest
+
+    steps:
+      - name: Open Notepad
+        run: start-process notepad
+
+      - name: Wait 5 seconds
+        run: timeout /t 5 /nobreak
+
+      - name: Close Notepad
+        run: |
+          $notepad = Get-Process notepad -ErrorAction SilentlyContinue
+          if ($notepad) {
+            $notepad.CloseMainWindow() | Out-Null
+            Start-Sleep -Seconds 2
+            # If it still didn't close, kill it forcefully
+            if (!$notepad.HasExited) {
+              $notepad | Stop-Process -Force
+            }
+          }
+        shell: powershell
