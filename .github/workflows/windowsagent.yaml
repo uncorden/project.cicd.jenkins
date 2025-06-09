@@ -30,6 +30,7 @@ jobs:
       - name: Check Chrome Version
         shell: pwsh
         run: |
-          & "C:\Program Files\Google\Chrome\Application\chrome.exe" --version
+          $version = & "C:\Program Files\Google\Chrome\Application\chrome.exe" --version
+          Write-Output "Chrome Version: $version"
 
 
