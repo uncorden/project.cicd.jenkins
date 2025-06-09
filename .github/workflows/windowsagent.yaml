@@ -38,6 +38,7 @@ jobs:
         run: |
           $version = & "C:\Program Files\Google\Chrome\Application\chrome.exe" --version
           Write-Output "Chrome Version: $version"
+          get-childitem "C:\program files"
         shell: pwsh
 
 
