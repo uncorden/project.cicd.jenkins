@@ -26,11 +26,18 @@ jobs:
             }
           }
         shell: pwsh
-
-      - name: Check Chrome Version
+      - name: Download Chrome Installer
+        run: Invoke-WebRequest -Uri "https://dl.google.com/chrome/install/latest/chrome_installer.exe" -OutFile "$env:TEMP\chrome_installer.exe"
         shell: pwsh
+      
+      - name: Install Chrome Silently
+        run: Start-Process -FilePath "$env:TEMP\chrome_installer.exe" -ArgumentList "/silent", "/install" -Wait
+        shell: pwsh
+      
+      - name: Verify Chrome Installation
         run: |
           $version = & "C:\Program Files\Google\Chrome\Application\chrome.exe" --version
           Write-Output "Chrome Version: $version"
+        shell: pwsh
 
 
