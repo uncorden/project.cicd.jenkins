@@ -2,43 +2,46 @@ name: Open and Close Notepad on Windows Runner
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   open-close-notepad:
     runs-on: windows-latest
 
     steps:
-      - name: Open Notepad
-        run: start-process notepad
+      # - name: Open Notepad
+      #   run: start-process notepad
 
-      - name: Wait 5 seconds
-        run: Start-Sleep -Seconds 5
-        shell: pwsh
+      # - name: Wait 5 seconds
+      #   run: Start-Sleep -Seconds 5
+      #   shell: pwsh
 
-      - name: Close Notepad
-        run: |
-          $notepad = Get-Process notepad -ErrorAction SilentlyContinue
-          if ($notepad) {
-            $notepad.CloseMainWindow() | Out-Null
-            Start-Sleep -Seconds 2
-            if (!$notepad.HasExited) {
-              $notepad | Stop-Process -Force
-            }
-          }
-        shell: pwsh
-      - name: Download Chrome Installer
-        run: Invoke-WebRequest -Uri "https://dl.google.com/chrome/install/latest/chrome_installer.exe" -OutFile "$env:TEMP\chrome_installer.exe"
-        shell: pwsh
+      # - name: Close Notepad
+      #   run: |
+      #     $notepad = Get-Process notepad -ErrorAction SilentlyContinue
+      #     if ($notepad) {
+      #       $notepad.CloseMainWindow() | Out-Null
+      #       Start-Sleep -Seconds 2
+      #       if (!$notepad.HasExited) {
+      #         $notepad | Stop-Process -Force
+      #       }
+      #     }
+      #   shell: pwsh
+      # - name: Download Chrome Installer
+      #   run: Invoke-WebRequest -Uri "https://dl.google.com/chrome/install/latest/chrome_installer.exe" -OutFile "$env:TEMP\chrome_installer.exe"
+      #   shell: pwsh
       
-      - name: Install Chrome Silently
-        run: Start-Process -FilePath "$env:TEMP\chrome_installer.exe" -ArgumentList "/silent", "/install" -Wait
-        shell: pwsh
+      # - name: Install Chrome Silently
+      #   run: Start-Process -FilePath "$env:TEMP\chrome_installer.exe" -ArgumentList "/silent", "/install" -Wait
+      #   shell: pwsh
       
       - name: Verify Chrome Installation
         run: |
           $version = & "C:\Program Files\Google\Chrome\Application\chrome.exe" --version
           Write-Output "Chrome Version: $version"
-          get-childitem "C:\program files"
+          get-childitem "C:\program files\google"
         shell: pwsh
 
 
