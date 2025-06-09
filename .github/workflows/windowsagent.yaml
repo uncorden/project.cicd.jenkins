@@ -20,9 +20,9 @@ jobs:
           if ($notepad) {
             $notepad.CloseMainWindow() | Out-Null
             Start-Sleep -Seconds 2
-            # If it still didn't close, kill it forcefully
             if (!$notepad.HasExited) {
               $notepad | Stop-Process -Force
             }
           }
-        shell: powershell
+        shell: pwsh
+
