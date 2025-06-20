@@ -23,22 +23,4 @@ jobs:
         run: false
         continue-on-error: true
 
-      - name: Final Check and Fail if Needed
-        env:
-          STEP_IDS: "step1 step2 step3"
-        run: |
-          failed_steps=()
-
-          for step in $STEP_IDS; do
-            outcome="${{ steps[step].outcome }}"
-            if [ "$outcome" != "success" ]; then
-              failed_steps+=("$step")
-            fi
-          done
-
-          if [ ${#failed_steps[@]} -gt 0 ]; then
-            echo "The following steps failed: ${failed_steps[*]}"
-            exit 1
-          else
-            echo "All steps succeeded"
-          fi
+      - name: Final Check and Fail if
