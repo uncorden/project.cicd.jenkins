@@ -1,0 +1,22 @@
+name: Fail Steps with Continue on Error
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fail-steps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1 - Fail Intentionally
+        run: exit 1
+        continue-on-error: true
+
+      - name: Step 2 - Another Failure
+        run: nonexistent-command
+        continue-on-error: true
+
+      - name: Step 3 - Yet Another Fail
+        run: |
+          echo "About to fail..."
+          false
+        continue-on-error: true
