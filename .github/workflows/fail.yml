@@ -1,4 +1,4 @@
-name: Fail Steps with Continue on Error
+name: Fail Steps with Continue on Error and Summary
 
 on:
   workflow_dispatch:
@@ -6,17 +6,44 @@ on:
 jobs:
   fail-steps:
     runs-on: ubuntu-latest
+    outputs:
+      step1_outcome: ${{ steps.step1.outcome }}
+      step2_outcome: ${{ steps.step2.outcome }}
+      step3_outcome: ${{ steps.step3.outcome }}
+
     steps:
       - name: Step 1 - Fail Intentionally
+        id: step1
         run: exit 1
         continue-on-error: true
 
       - name: Step 2 - Another Failure
+        id: step2
         run: nonexistent-command
         continue-on-error: true
 
       - name: Step 3 - Yet Another Fail
-        run: |
-          echo "About to fail..."
-          false
+        id: step3
+        run: exit 1
         continue-on-error: true
+
+      - name: Final Check and Fail if Needed
+        run: |
+          failed_steps=()
+
+          if [ "${{ steps.step1.outcome }}" != "success" ]; then
+            failed_steps+=("Step 1")
+          fi
+          if [ "${{ steps.step2.outcome }}" != "success" ]; then
+            failed_steps+=("Step 2")
+          fi
+          if [ "${{ steps.step3.outcome }}" != "success" ]; then
+            failed_steps+=("Step 3")
+          fi
+
+          if [ ${#failed_steps[@]} -ne 0 ]; then
+            echo "The following steps failed: ${failed_steps[*]}"
+            exit 1
+          else
+            echo "All steps succeeded"
+          fi
