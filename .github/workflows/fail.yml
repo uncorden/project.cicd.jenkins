@@ -20,7 +20,7 @@ jobs:
 
       - name: Step 3 - Yet Another Fail
         id: step3
-        run: false
+        run: exit 1
         continue-on-error: true
 
       - name: Final Check and Fail if
