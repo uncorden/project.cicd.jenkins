@@ -20,7 +20,7 @@ jobs:
 
       - name: Step 3 - Yet Another Fail
         id: step3
-        run: false
+        run: exit 0
         continue-on-error: true
 
       - name: Final Check and Fail if Needed
@@ -39,7 +39,7 @@ jobs:
           failed_steps=()
           for step in $STEP_IDS; do
             if [ "${outcomes[$step]}" != "success" ]; then
-              failed_steps+=("$step")
+             echo "$step is failed"
             fi
           done
 
