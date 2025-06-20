@@ -40,6 +40,8 @@ jobs:
           for step in $STEP_IDS; do
             if [ "${outcomes[$step]}" != "success" ]; then
              echo "$step is failed"
+             failed_steps+=("$step")
+             
             fi
           done
 
