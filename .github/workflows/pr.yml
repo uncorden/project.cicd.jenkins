@@ -5,9 +5,7 @@ on:
   pull_request:
     branches:
       - main
-  push:
-    branches-ignore:
-      - main
+      
 concurrency:
   group: validation-${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
   cancel-in-progress: true
