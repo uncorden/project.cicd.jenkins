@@ -59,6 +59,7 @@ jobs:
 
           if [ ${#failed_steps[@]} -gt 0 ]; then
             echo "❌ The following steps failed: ${failed_steps[*]}"
+            sleep 30
             exit 1
           else
             echo "✅ All steps succeeded"
