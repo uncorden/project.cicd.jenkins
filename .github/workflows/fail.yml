@@ -62,5 +62,5 @@ jobs:
             sleep 30
             exit 1
           else
-            echo "✅ All steps succeeded"
+            echo "✅ All steps succeedded"
           fi
