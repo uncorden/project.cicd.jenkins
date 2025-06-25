@@ -9,7 +9,7 @@ on:
     branches-ignore:
       - main
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref_name }}
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
   cancel-in-progress: true
   
 jobs:
@@ -19,7 +19,9 @@ jobs:
     steps:
       - name: Step 1 - Fail Intentionally
         id: step1
-        run: exit 1
+        run: |
+          exit 1
+          echo ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
         continue-on-error: true
 
       - name: Step 2 - Another Failure
