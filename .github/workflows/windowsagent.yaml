@@ -3,7 +3,7 @@ name: Open and Close Notepad on Windows Runner
 on:
   workflow_dispatch:
   push:
-    branches:
+    branches-ignore:
       - main
 
 jobs:
