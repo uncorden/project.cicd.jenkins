@@ -1,4 +1,4 @@
-name: Fail Steps with Continue on Error and Loop Check
+name: fail-steps-on-error
 
 on:
   workflow_dispatch:
