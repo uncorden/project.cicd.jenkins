@@ -1,4 +1,5 @@
 name: Fail Steps with Continue on Error and Loop Check
+# some comment
 
 on:
   workflow_dispatch:
