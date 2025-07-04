@@ -1,1 +1,17 @@
+name: Fail Steps with Continue on Error
 
+on:
+  workflow_dispatch:
+
+jobs:
+  fail-steps:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1  # ensures sequential execution
+      matrix:
+        version: [10, 12, 14]
+    steps:
+      - name: Step ${{matrix.version}}
+        run: |
+          echo "running  ${{matrix.version}}"
+        continue-on-error: true
